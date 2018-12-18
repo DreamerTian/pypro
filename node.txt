@@ -47,5 +47,5 @@ isbn搜索：http://t.yushu.im/v2/book/isbn/{isbn}
 python中的三元表达式
 
 return 1 if True else 2
-if前面返回真值的判断 else 返回假值的判断
+if前面返回真值的判断 else 返回假值的判断 
 
