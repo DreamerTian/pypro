@@ -19,3 +19,33 @@
   app = Flask(__name__)
 3.运行flask
   app.run()
+
+
+###数据API
+基地址：http://t.yushu.im
+关键字搜索：http://t.yushu.im/v2/book/search?q={}&start={}&count={}
+isbn搜索：http://t.yushu.im/v2/book/isbn/{isbn}
+豆瓣API：https://api.douban.com/v2/book
+
+###第一个视图函数
+
+条件判断的先后对代码的效率有影响
+把假的先放前面，把执行慢速率慢的放在后面（比如需要查询数据库的）
+
+###简单的重构
+为什么重构？
+减少代码量，提高阅读性
+视图函数代码要简介 便于维护 便于阅读
+怎么看源代码？
+不要着急看源代码，第一遍先理清线性结构，而不是要理清细节
+
+###使用requests请求数据API
+可以用 urllib 虽然不需要安装但是比较麻烦
+使用 requests 需要安装requests的包
+导入 requests包 import requests
+
+python中的三元表达式
+
+return 1 if True else 2
+if前面返回真值的判断 else 返回假值的判断
+

@@ -3,14 +3,24 @@ __author__ = ''
 __date__ = '2018/12/12 14:49'
 
 from flask import Flask
+from fisher.helper import is_isbn_or_key
 
 app = Flask(__name__)
 app.config.from_object('config')
 
 
-@app.route('/hello')
-def hello():
-    return 'Hello'
+@app.route('/book/search/<q>/<page>')
+def search(q, page):
+    """
+        q
+        page
+    :return:
+    """
+    # isbn
+    isbn_or_key = is_isbn_or_key(q)
+
+
+    pass
 
 
 if __name__ == '__main__':
