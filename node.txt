@@ -24,7 +24,7 @@
 ###数据API
 基地址：http://t.yushu.im
 关键字搜索：http://t.yushu.im/v2/book/search?q={}&start={}&count={}
-isbn搜索：http://t.yushu.im/v2/book/isbn/{isbn}
+isbn搜索：http://t.yushu.im/v2/book/isbn/{}
 豆瓣API：https://api.douban.com/v2/book
 
 ###第一个视图函数
@@ -43,9 +43,73 @@ isbn搜索：http://t.yushu.im/v2/book/isbn/{isbn}
 可以用 urllib 虽然不需要安装但是比较麻烦
 使用 requests 需要安装requests的包
 导入 requests包 import requests
+不能直接return json格式 要格式化之后再return
 
 python中的三元表达式
 
 return 1 if True else 2
-if前面返回真值的判断 else 返回假值的判断 
+if前面返回真值的判断 else 返回假值的判断
 
+###从API获取数据
+
+在类中的方法前面加上此修饰关键字，此方法就成为了 类方法
+@classmethod
+
+
+###使用 jsonify
+使用jsonify格式化json格式的数据
+
+###将视图函数拆分到单独的文件中
+不推荐吧 所有的视图函数放到到一个文件中
+把不同的业务模型放到不同的视图函数中
+在根目录新建app文件夹来份文件
+入口文件只做一些初始化和启动项目的工作
+
+
+
+###蓝图和视图函数
+flask 引用了蓝图机制
+蓝图不能独立存在，只能插入APP中
+蓝图又包括视图函数
+把视图函数注册到不同蓝图，来文件
+
+
+###用蓝图注册视图函数
+Blueprint()用来注册一个蓝图
+Blueprint 从 flask中导入
+Blueprint需要两个参数 第一个 蓝图的名称（一般是文件夹名） 第二个是路径（通常用__name__）  如 Blueprint('web', __name__)
+
+想要成功调用视图函数 还要把蓝图注册到app中
+
+###拆分配置文件
+
+
+
+###单蓝图多模块分拆视图函数
+
+###request接收参数
+request.to_dict()转成可变的字典
+
+###WTForms参数验证
+WTForms是第三方的参数验证的插件 使用时要安装一下
+用法：
+概念：验证层
+验证完之后 参数从form中取
+strip()取出两遍的空格 和php trim() 功能一样
+
+#####基本目录结构完成 开始数据库的学习
+
+###定义一个模型类
+用 Code First 来创建数据库 需要安装flask-sqlalchemy
+
+Column 创建一列
+
+###将模型映射到数据库中
+想要使用SqlAlchemy 就要导入 flask_sqlalchemy
+导入之后还需要把SqlAlchemy 插入主要核心类中 db.init_app(app)
+在配置文件中添加配置参数 名字不能改
+
+SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:@localhost:3306/fisher'
+SQLALCHEMY_DATABASE_URI = '数据库类型+数据库驱动://用户名:密码@HOST:端口/数据库名'
+SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:@localhost:3306/fisher'
+cymsyql 不是flask 包中的 需要安装一下 cymysql 是python连接mysql的驱动
