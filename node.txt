@@ -112,4 +112,58 @@ Column 创建一列
 SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:@localhost:3306/fisher'
 SQLALCHEMY_DATABASE_URI = '数据库类型+数据库驱动://用户名:密码@HOST:端口/数据库名'
 SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:@localhost:3306/fisher'
+
 cymsyql 不是flask 包中的 需要安装一下 cymysql 是python连接mysql的驱动
+
+####flask 核心机制
+###flask 中经典的错误
+#离线应用、单元测试的时候报错误 working outside application context 是因为app_context没有入栈
+需要手动入栈和出栈，
+ctx = app.app_context()
+ctx.push()
+a = app.current_app()
+d = current_app.config['DEBUG']
+ctx.pop()
+
+//使用with语法简写上述代码
+with app.app_context():
+    a = app.current_app()
+    d = current_app.config['DEBUG']
+
+###python with语句
+1.with语句用法：实现了上下文协议的对象使用with
+2.上下文管理器
+3.__enter__、__exit__ 实现了这两个方法
+4.上下文表达式必须返回一个上下文管理器
+
+事例：文件读写和数据库操作
+#文件读写
+try:
+    f = open(r'文件路径')
+    print(f.read())
+finally:
+    f.close()
+
+with语法
+with: open(r'文件路径') as f :
+    print(f.read())
+
+
+####Python线程
+###什么是线程
+什么是线程，那就要先知道什么是进程了
+进程是竞争计算机资源的基本单位
+
+1.单核CPU 永远只能执行一个应用程序？
+2.但是我们看到的并不是，因为CPU运算速度特别快，它是在不同的应用程序进程之间切换
+3.进程调度 -- 有自己的算法来挂起 切换到另外一个进程，
+4.进程/线程 进程来回的切换开销是非常大的
+
+什么是线程?
+线程是进程的一部分，可以有一个线程，可以有多个线程
+因为进程的切换太过于笨重，开销太大 所以要引入更小的单元
+线程切换要小
+
+他们的分工
+进程 分配资源 内存资源
+线程 利用CPU执行代码
